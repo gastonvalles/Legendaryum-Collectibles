@@ -1,27 +1,25 @@
 {
-    "name": "legendaryum-collectibles",
-    "version": "1.0.0",
-    "description": "Microservicio para manejar coleccionables en Legendaryum",
-    "main": "dist/server.js",
-    "scripts": {
-        "start": "node dist/server.js",
-        "dev": "ts-node src/server.ts",
-        "build": "tsc",
-        "lint": "eslint . --ext .ts",
-        "test": "echo \"No tests configured\""
-    },
-    "author": "Gaston Valles",
-    "license": "MIT",
-    "dependencies": {
-        "express": "^4.17.1",
-        "ioredis": "^4.23.1",
-        "socket.io": "^4.7.2"
-    },
-    "devDependencies": {
-        "@types/express": "^4.17.13",
-        "@types/ioredis": "^4.14.12",
-        "eslint": "^7.32.0",
-        "ts-node": "^10.4.0",
-        "typescript": "^4.4.3"
-    }
+  "name": "legendaryum-collectibles",
+  "version": "1.0.0",
+  "description": "Microservicio para manejar coleccionables en Legendaryum",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run build && node dist/server.js",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "redis": "^4.6.8",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/redis": "^4.0.11",
+    "@types/socket.io": "^3.0.2",
+    "typescript": "^5.2.2"
+  }
 }
