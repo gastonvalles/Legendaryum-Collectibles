@@ -18,7 +18,7 @@ const startServer = async () => {
 
   // Agregar el endpoint GET en el path "/"
   app.get('/', async (req, res) => {
-    const content = await readFile("public/chat.html")
+    const content = await readFile("public/index.html")
     res.writeHead(200, {
       "content-type": "text/html"
     });
@@ -31,7 +31,7 @@ const startServer = async () => {
   const port = process.env.PORT || 3000;
 
   httpsServer.listen(port, () => {
-    console.log(`HTTPS Server listening at https://localhost:${port}`);
+    console.log(`Server listening at https://localhost:${port}`);
   });
 };
 

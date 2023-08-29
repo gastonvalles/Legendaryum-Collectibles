@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Socket.IO WebTransport example</title>
   </head>
   <body>
@@ -16,7 +16,9 @@
       const socket = io();
 
       socket.on("connect", () => {
-        console.log(`connected with transport ${socket.io.engine.transport.name}`);
+        console.log(
+          `connected with transport ${socket.io.engine.transport.name}`
+        );
 
         $status.innerText = "Connected";
         $transport.innerText = socket.io.engine.transport.name;
