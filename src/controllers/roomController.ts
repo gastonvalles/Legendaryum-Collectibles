@@ -1,12 +1,20 @@
 import { Request, Response } from 'express';
 import { redisService } from '../services/redisService';
-import { CoinData } from '../models/coinModel';
+import { Coin } from '../models/coinModel';
+import { Room } from '../models/roomModel';
 
 export const roomController = {
-  async getAvailableCoinsCount(req: Request, res: Response) {
+  async getRoomInfo(req: Request, res: Response) {
     const { roomName } = req.params;
-    const coins: CoinData = await redisService.get('coins');
-    const roomCoins = coins[roomName] || [];
-    res.json({ availableCoins: roomCoins.length });
-  },
+    const rooms: Room[] = await redisService.get('ROOMS_KEY');
+
+    const targetRoom = rooms.find(room => room.name === roomName);
+
+    if (targetRoom) {
+      const roomCoins: Coin[] = targetRoom.coins || [];
+      res.json({ roomCoins, availableCoins: roomCoins.length });
+    } else {
+      res.status(404).json({ message: 'Room not found' });
+    }
+  }
 };

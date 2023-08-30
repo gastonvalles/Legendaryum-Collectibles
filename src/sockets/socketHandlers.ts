@@ -1,8 +1,6 @@
 import { Server, Socket } from 'socket.io';
 import { coinController } from '../controllers/coinController';
-import { Coin } from '../models/coinModel';
 import { roomController } from '../controllers/roomController';
-import { redisService } from '../services/redisService';
 
 export const setupSocketHandlers = (io: Server): void => {
   io.on('connection', (socket: Socket) => {
@@ -12,14 +10,21 @@ export const setupSocketHandlers = (io: Server): void => {
       socket.join(roomName);
 
       try {
-        const coinData: Coin[] = await coinController.getCoins(roomName);
-        socket.emit('coins', coinData);
+        const req = {
+          params: { roomName },
+        };
+
+        const res = {
+          json: (data: any) => socket.emit('roomInfo', data),
+        };
+
+        await roomController.getRoomInfo(req as any, res as any);
       } catch (error) {
-        console.error('Error fetching coin data:', error);
+        console.error('Error fetching room info:', error);
       }
     });
 
-    socket.on('pickupCoin', async ({ roomName, coinIndex }: { roomName: string; coinIndex: number }) => {
+    socket.on('pickupCoin', async ({ roomName, coinIndex }: { roomName: string; coinIndex: string }) => {
       try {
         await coinController.pickupCoin(roomName, coinIndex);
         io.to(roomName).emit('coinPickedUp', coinIndex);
