@@ -1,0 +1,30 @@
+{
+    "rooms": [
+      {
+        "name": "Room1",
+        "numCoins": 20,
+        "coinGenerationArea": {
+          "xmin": -10,
+          "xmax": 10,
+          "ymin": -5,
+          "ymax": 5,
+          "zmin": -5,
+          "zmax": 5
+        }
+      },
+      {
+        "name": "Room2",
+        "numCoins": 15,
+        "coinGenerationArea": {
+          "xmin": -8,
+          "xmax": 8,
+          "ymin": -4,
+          "ymax": 4,
+          "zmin": -4,
+          "zmax": 4
+        }
+      }
+    ],
+    "cacheTTL": 3600
+  }
+  

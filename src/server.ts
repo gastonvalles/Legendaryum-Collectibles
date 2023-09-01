@@ -21,7 +21,6 @@ const startServer = async () => {
 
   app.use(express.static(__dirname + '/public'));
 
-  // Agregar el endpoint GET en el path "/"
   app.get('/', async (req, res) => {
     const content = await readFile("public/index.html")
     res.writeHead(200, {

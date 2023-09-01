@@ -6,6 +6,14 @@ export const setupSocketHandlers = (io: Server): void => {
   io.on('connection', (socket: Socket) => {
     console.log('Client connected:', socket.id);
 
+    socket.on('disconnect', () => {
+      console.log('Client disconnected:', socket.id);
+    });
+
+    socket.on('chat message', (msg) => {
+      io.emit('chat message', msg);
+    });
+
     socket.on('joinRoom', async (roomName: string) => {
       socket.join(roomName);
 

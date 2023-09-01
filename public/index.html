@@ -1,45 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Socket.IO WebTransport example</title>
-  </head>
-  <body>
-    <p>Status: <span id="status">Disconnected</span></p>
-    <p>Transport: <span id="transport">N/A</span></p>
+<head>
+  <meta charset="UTF-8" />
+  <title>Legendaryum Collectibles</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white rounded-lg shadow-md p-4 w-80">
+    <ul id="messages" class="mb-4 h-48 overflow-y-auto"></ul>
+    <form id="form" action="" class="flex">
+      <input id="input" autocomplete="off" class="flex-grow rounded-l-md px-2 py-1 border" />
+      <button class="bg-blue-500 text-white rounded-r-md px-4 py-1">Send</button>
+    </form>
+  </div>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      const $status = document.getElementById("status");
-      const $transport = document.getElementById("transport");
+    var messages = document.getElementById("messages");
+    var form = document.getElementById("form");
+    var input = document.getElementById("input");
 
-      const socket = io();
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (input.value) {
+        socket.emit("chat message", input.value);
+        input.value = "";
+      }
+    });
 
-      socket.on("connect", () => {
-        console.log(
-          `connected with transport ${socket.io.engine.transport.name}`
-        );
-
-        $status.innerText = "Connected";
-        $transport.innerText = socket.io.engine.transport.name;
-
-        socket.io.engine.on("upgrade", (transport) => {
-          console.log(`transport upgraded to ${transport.name}`);
-
-          $transport.innerText = transport.name;
-        });
-      });
-
-      socket.on("connect_error", (err) => {
-        console.log(`connect_error due to ${err.message}`);
-      });
-
-      socket.on("disconnect", (reason) => {
-        console.log(`disconnect due to ${reason}`);
-
-        $status.innerText = "Disconnected";
-        $transport.innerText = "N/A";
-      });
-    </script>
-  </body>
+    socket.on("chat message", function (msg) {
+      var item = document.createElement("li");
+      item.textContent = msg;
+      messages.appendChild(item);
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+  </script>
+</body>
 </html>
