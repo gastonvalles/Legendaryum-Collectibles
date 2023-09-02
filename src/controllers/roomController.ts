@@ -1,20 +1,17 @@
 import { Request, Response } from 'express';
-import { redisService } from '../services/redisService';
-import { Coin } from '../models/coinModel';
-import { Room } from '../models/roomModel';
+import { readFile } from 'fs/promises';
 
-export const roomController = {
-  async getRoomInfo(req: Request, res: Response) {
-    const { roomName } = req.params;
-    const rooms: Room[] = await redisService.get('ROOMS_KEY');
-
-    const targetRoom = rooms.find(room => room.name === roomName);
-
-    if (targetRoom) {
-      const roomCoins: Coin[] = targetRoom.coins || [];
-      res.json({ roomCoins, availableCoins: roomCoins.length });
-    } else {
-      res.status(404).json({ message: 'Room not found' });
-    }
+const roomController = async (req: Request, res: Response) => {
+  try {
+    const content = await readFile("public/index.html")
+    res.writeHead(200, {
+      "content-type": "text/html"
+    });
+    res.write(content);
+    res.end();
+  } catch (error) {
+    res.status(500).send(error);
   }
 };
+
+export default roomController;

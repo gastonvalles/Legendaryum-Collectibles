@@ -1,11 +1,3 @@
 export interface Coin {
-    id: string;
-    x: number;
-    y: number;
-    z: number;
-  }
-  
-  export interface CoinData {
-    [roomId: string]: Coin[];
-  }
-  
+  id: number;
+}
