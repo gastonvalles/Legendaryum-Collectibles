@@ -50,3 +50,6 @@ export const generateCoinsForRoom = async (roomConfig: RoomConfig, roomName: any
     return coins;
 };
 
+export const clearRedisBeforeStart =async () => {
+    client.flushAll()
+}
