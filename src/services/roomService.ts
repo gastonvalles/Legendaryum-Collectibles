@@ -19,7 +19,7 @@ export const loadRoomConfig = async () => {
         const response = await axios.get('https://raw.githubusercontent.com/gastonvalles/Legendaryum-Collectibles/main/src/data/data.json');
         return response.data.rooms;
     } catch (error) {
-        console.error('Error al cargar el archivo JSON:', error);
+        console.log('Error al cargar el archivo JSON:', error);
         throw error;
     }
 }
