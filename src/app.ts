@@ -2,11 +2,13 @@ import express from 'express';
 import responseTime from 'response-time';
 import { readFile } from 'fs/promises';
 import client from './services/redisService';
+import roomRoutes from './routes/roomRoutes';
 
 const app = express();
 
 app.use(responseTime());
 app.use(express.static(__dirname + '/public'));
+app.use(express.json());
 
 client.connect();
 
@@ -18,5 +20,7 @@ app.get('/', async (req, res) => {
     res.write(content);
     res.end();
 });
+
+app.use('/', roomRoutes);
 
 export default app;
