@@ -64,16 +64,30 @@
             ? "text-green-600"
             : "text-red-600";
           coinItem.innerHTML = `
-            <p class="text-lg font-semibold">
-              Position: x=${coin.x}, y=${coin.y}, z=${coin.z}
-            </p>
-            <p class="${statusClass}">
-              Status: ${coin.available ? "Available" : "Taken"}
-            </p>
-          `;
+      <p class="text-lg font-semibold">
+        Position: x=${coin.x}, y=${coin.y}, z=${coin.z}
+      </p>
+      <p class="${statusClass}">
+        Status: ${coin.available ? "Available" : "Taken"}
+      </p>
+      <button
+        ${
+          coin.available
+            ? `onclick="grabCoin('${selectedRoom}', ${coin.id})"`
+            : "disabled"
+        }
+        class="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+      >
+        Grab Coin
+      </button>
+    `;
           coinList.appendChild(coinItem);
         });
       });
+
+      function grabCoin(roomName, coinId) {
+        socket.emit("grabCoin", { roomName, coinId });
+      }
 
       function joinRoom(roomName) {
         const seed = Math.random().toString(36).substr(2, 9);
