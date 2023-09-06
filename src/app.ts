@@ -3,6 +3,7 @@ import responseTime from 'response-time';
 import { readFile } from 'fs/promises';
 import client from './services/redisService';
 import roomRoutes from './routes/roomRoutes';
+import coinRoutes from './routes/coinRoutes';
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.get('/', async (req, res) => {
     res.end();
 });
 
-app.use('/', roomRoutes);
+app.use(roomRoutes);
+
+app.use(coinRoutes);
 
 export default app;
