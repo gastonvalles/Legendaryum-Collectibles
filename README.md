@@ -4,7 +4,7 @@
 
 ## Contexto
 
-Legendaryum Collectibles es un microservicio diseñado para crear una experiencia de coleccionismo en un metaverso. Los usuarios pueden conectarse al servicio a través de Socket.io y explorar diferentes "rooms" que contienen "coins" en 3D como objetos coleccionables. El objetivo principal es permitir que los usuarios encuentren y recojan estas monedas en un espacio virtual compartido.
+Legendaryum Collectibles es una app diseñada para crear una experiencia de coleccionismo en un metaverso. Los usuarios pueden conectarse al servicio a través de Socket.io y explorar diferentes "rooms" que contienen "coins" en 3D como objetos coleccionables. El objetivo principal es permitir que los usuarios encuentren y recojan estas monedas en un espacio virtual compartido.
 
 ## Challenge
 
